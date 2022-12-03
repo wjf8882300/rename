@@ -801,7 +801,18 @@ namespace rename
 
 		}
 
-		private int CompareDinosByLength(string x, string y)
+        public class MyNodeComparer : IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                MyNode a = (MyNode)x;
+                MyNode b = (MyNode)y;
+                return a.oldName.CompareTo(b.oldName);
+            }
+        }
+
+
+        private int CompareDinosByLength(string x, string y)
 		{
 			if(x.Length!=y.Length)
 				return x.Length.CompareTo(y.Length);
@@ -824,35 +835,40 @@ namespace rename
                 //filepath = filepath.Remove(2, 1);
                 array = new ArrayList();
 
-                //List<string> list = new List<string>();
-                //for (int i = 0; i < listView1.SelectedItems.Count; i++)
-                //{
-                //    list.Add(listView1.SelectedItems[i].Text);
-                //}
-
-                currFileList.Sort(CompareDinosByLength);
-
-                for (int i = 0; i < currFileList.Count; i++)
+                List<string> list = new List<string>();
+                for (int i = 0; i < listView1.SelectedItems.Count; i++)
                 {
+                    list.Add(listView1.SelectedItems[i].Text);
+                }
+
+                // currFileList.Sort(CompareDinosByLength);
+                list.Sort();
+                int j = 0;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    string oldName = list[i];
+                    MyNode node = new MyNode();
+                    node.oldName = filepath + "\\" + oldName;
+                    // 目录不参加序列化
+                    if(Directory.Exists(node.oldName))
+                    {
+                        continue;
+                    }
                     string name = "";
-                    int j = i + 1;
-                    if (j < 10)
+                    
+                    if (++j < 10)
                         name = "0" + j;
                     else
                         name = j.ToString();
 
-                    if (currFileList[i].LastIndexOf('.') != -1)
+                    if (oldName.LastIndexOf('.') != -1)
 					{
-                        string houzhui = currFileList[i].Substring(currFileList[i].LastIndexOf('.'));
-						MyNode node = new MyNode();
-                        node.oldName = filepath + "\\" + currFileList[i];
-						node.newName = filepath + "\\" + name + houzhui;
+                        string houzhui = oldName.Substring(oldName.LastIndexOf('.'));
+                        node.newName = filepath + "\\" + name + houzhui;
 						array.Add(node);
 					}
 					else
 					{
-						MyNode node = new MyNode();
-                        node.oldName = filepath + "\\" + currFileList[i];
 						node.newName = filepath + "\\" + name;
 						array.Add(node);
 					}

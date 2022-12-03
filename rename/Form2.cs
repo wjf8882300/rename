@@ -63,6 +63,7 @@ namespace rename
                 listView1.Items.Insert(i, item);
             }
         }
+
         private void Form2_Load(object sender, EventArgs e)
         {
             //listBox1.Items.Clear();
@@ -71,7 +72,7 @@ namespace rename
             MainFrm frm = new MainFrm();
             array = new ArrayList();
             array = frm.Array;
-            if (array == null) return;
+            if (array == null) return;            
             DisplayPathandName();
         }
 

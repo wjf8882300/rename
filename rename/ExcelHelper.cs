@@ -91,7 +91,7 @@ namespace DevSoft.CommonApp.Util
 
             //创建一个Application对象并使其可见
             beforeTime = DateTime.Now;
-            app = new Excel.ApplicationClass();
+            app = new Excel.Application();
             app.Visible = true;
             afterTime = DateTime.Now;
 
@@ -115,7 +115,7 @@ namespace DevSoft.CommonApp.Util
 
             //创建一个Application对象并使其可见
             beforeTime = DateTime.Now;
-            app = new Excel.ApplicationClass();
+            app = new Excel.Application();
             app.Visible = true;
             afterTime = DateTime.Now;
 
@@ -137,7 +137,7 @@ namespace DevSoft.CommonApp.Util
         {
             //创建一个Application对象并使其可见
             beforeTime = DateTime.Now;
-            app = new Excel.ApplicationClass();
+            app = new Excel.Application();
             //app.Visible = true; 不自动打开
             afterTime = DateTime.Now;
 
@@ -2256,7 +2256,7 @@ Excel.XlSaveAsAccessMode.xlExclusive, missing, missing, missing, missing, missin
 
 			//创建一个Application对象并使其可见
 			beforeTime = DateTime.Now;
-			app = new Excel.ApplicationClass();
+			app = new Excel.Application();
 			app.Visible = false;
 			afterTime = DateTime.Now;
 
